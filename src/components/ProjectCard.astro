@@ -1,0 +1,90 @@
+---
+export interface Props{
+    title: string;
+    description: string;
+    date: string;
+    href: string;
+}
+
+const {href, title, description, date} = Astro.props;
+---
+
+<li class="projectCard">
+    <a href={href}>
+        <div class="projectCard-header">
+            <h3>{title}</h3>
+            <div class="projectCard-header-collaborators">
+                <!-- <span></span> -->
+                <span></span>
+            </div>
+        </div>
+        <p>
+            {description.substring(1, 50)}...
+        </p>
+        <div class="projectCard-footer">
+            <span>{date}</span>
+        </div>
+    </a>
+</li>
+
+<style>
+    .projectCard{
+        list-style: none;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .projectCard:hover{
+        background-color: white;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .projectCard-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .projectCard-header-collaborators{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .projectCard-header-collaborators > span{
+        background-color: #019FA9;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .projectCard-header-collaborators > span:nth-child(2n){
+        background-color: #A84502;
+    }
+    .projectCard-header-collaborators > span:not(first-child){
+        margin-left: -15px;
+    }
+
+    .projectCard-footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        color: rgba(0, 0, 0, 0.40);
+    }
+
+    .projectCard a {
+        text-decoration: none;
+    }
+
+    .projectCard h3{
+        color: rgba(0, 0, 0, 0.80);
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .projectCard p {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 15px;
+        border-radius: 10px;
+        color: rgba(0, 0, 0, 0.55);
+    }
+    .projectCard span{
+    }
+</style>
