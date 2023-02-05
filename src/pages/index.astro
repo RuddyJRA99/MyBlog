@@ -7,13 +7,77 @@ import CardNote from '../components/NoteCard.astro';
 
 <Layout title="Inicio" indexNavbar={0}>
 	<main>
-		
+		<section class="header">
+			<div class="header-image">
+				<img width="1000" src="../../public/User/userCover.webp">
+			</div>
+			<div class="header-description">
+				<h2>Hola! mi nombre es <span>Carlos</span></h2>
+				<p>soy ingeniera en sistemas, desarrollador web Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño</p>
+				<div class="header-description-contact">
+					
+				</div>
+			</div>
+		</section>
 	</main>
 </Layout>
 
 <style>
 	main{
-		width: 100%;
-		height: 100%;
+	}
+	.header{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		margin: auto;
+		background-color: brown;
+		height: calc(100vh - 200px );
+	}
+	.header-image{
+		overflow: hidden;
+		width: 400px;
+		
+	}
+	.header-image > img{
+	}
+	.header-description{
+		width: 500px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+
+	.header-description > h2{
+		font-size: 50px;
+		font-weight: 400;
+	}
+
+	.header-description > p{
+		font-size: 20px;
+		color: var(--secondary-text);
+		margin: 0 15px;
+	}
+	.header-description-contact{
+		background-color: var(--box-background);
+		height: 150px;
+		border-radius: 15px;
+	}
+
+	@media screen and (max-width: 1000px){
+		.header-image{
+			width: auto;
+			background-color: aqua;
+		}
+
+		.header-image{
+			width: 150px;
+		}
+		.header-description{
+
+		}
+
+		.header-description > h2{
+			font-size: 30px;
+		}
 	}
 </style>

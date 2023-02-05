@@ -7,6 +7,10 @@ export interface Props {
 }
 
 const { title, indexNavbar } = Astro.props;
+
+const openRightBar = () => {
+	console.log("Hello");
+}
 ---
 
 <!DOCTYPE html>
@@ -28,16 +32,16 @@ const { title, indexNavbar } = Astro.props;
 					<Icon width="20" pack="mdi" name="download"/>
 					Descargar CV
 				</button>
-				<button class="buttonMenu">
+				<button class="buttonMenu" id="MenuOpenButton">
 					<Icon width="30" pack="mdi" name="menu"/>
 				</button>
 				<span class="time">{new Date().getHours()}<span class="coursor time">:</span>{new Date().getMinutes()}</span>
 			</div>
 		</nav>
-		<nav class="rightBar ">
-			<button class="buttonCloseMenu">
-					<Icon width="30" pack="mdi" name="close"/>
-				</button>
+		<nav class="rightBar" id="rightBar">
+			<button class="buttonCloseMenu" id="MenuCloseButton">
+				<Icon width="30" pack="mdi" name="close"/>
+			</button>
 			<ul class="closeSideBar">
 				<li class={indexNavbar === 0? "active" : ""}>Acerca de mi</li>
 				<li class={indexNavbar === 1? "active" : ""}>Proyectos</li>
@@ -125,10 +129,14 @@ const { title, indexNavbar } = Astro.props;
 			backdrop-filter: blur(5px);
 			height: auto;
 			writing-mode: horizontal-tb;
-			display: flex;
+			display: none;
 			justify-content: right;
 		}
 
+		.buttonCloseMenu, .buttonMenu{
+			display: block;
+		}
+		
 		.rightBar ul{
 			padding: 0 50px;
 			width: auto;
@@ -149,7 +157,6 @@ const { title, indexNavbar } = Astro.props;
 		display: grid;
 		grid-column: 1 / 2;
 		grid-row: 2 / 3;
-		background-color: rgb(207, 207, 207);
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
@@ -194,33 +201,9 @@ const { title, indexNavbar } = Astro.props;
 		align-items: center;
 		border-radius: 10px;
 		cursor: pointer;
-	}
-
-	.closeSideBar{
-		animation-name: MoveRightAnimation;
- 	 	animation-duration: 2s;
-  		animation-iteration-count: 1;
 		display: none;
 	}
 
-	@keyframes MoveRightAnimation{
-		0% {
-			transform: translateX(0rem);
-		}
-		100%{
-			transform: translateX(50rem);
-			display: none;
-		}
-	}
-	@keyframes MoveLeftAnimation{
-		0% {
-			display: flex;
-			transform: translateX(50rem);
-		}
-		100%{
-			transform: translateX(0rem);
-		}
-	}
 
 	@keyframes backgroundBlurShowAnimation{
 		0% {
@@ -245,6 +228,11 @@ const { title, indexNavbar } = Astro.props;
 	.coursor{
 		animation: blink-cursor 2000ms infinite normal;
 	}
+
+	.open{
+		display: flex !important;
+	}
+
 	@keyframes blink-cursor{
 		0%{color: white;}
 		50%{color: black;}
@@ -310,12 +298,22 @@ const { title, indexNavbar } = Astro.props;
 		margin-bottom: 5px;
 	}
 
-	.active{
-		background-color: var(--box-background);
-	}
 
 	.rightBar ul li:hover{
 		background-color: var(--box-background);
 		cursor: pointer;
 	}
+
+	.active{
+		background-color: var(--box-background);
+	}
 </style>
+<script>
+	let menu = document.querySelector('#rightBar');
+	let toggleMenu = () => {
+		console.log('Hola')
+		menu?.classList.toggle('open');
+	}
+	document.querySelector('#MenuOpenButton')?.addEventListener('click', toggleMenu);
+	document.querySelector('#MenuCloseButton')?.addEventListener('click', toggleMenu);
+</script>
