@@ -19,7 +19,7 @@ const {href, title, description, date} = Astro.props;
             </div>
         </div>
         <p>
-            {description.substring(1, 50)}...
+            {description.substring(1, 100)}...
         </p>
         <div class="projectCard-footer">
             <span>{date}</span>
@@ -81,9 +81,11 @@ const {href, title, description, date} = Astro.props;
     }
     .projectCard p {
         background-color: rgba(0, 0, 0, 0.05);
-        padding: 15px;
+        padding: 30px;
         border-radius: 10px;
         color: rgba(0, 0, 0, 0.55);
+        max-width: 400px;
+        min-width: 100px;
     }
     .projectCard span{
     }

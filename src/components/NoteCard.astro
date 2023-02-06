@@ -84,7 +84,7 @@ const {href, title, description, date, author} = Astro.props;
     }
 
     .NoteCard-header-coverImage > img{
-        width: 100%;
+        width: 150px;
     }
 
     .NoteCard-footer{
@@ -100,10 +100,11 @@ const {href, title, description, date, author} = Astro.props;
 
     .NoteCard p{
         background-color: rgba(0, 0, 0, 0.05);
-        padding: 15px;
+        padding: 30px;
         border-radius: 10px;
         color: rgba(0, 0, 0, 0.55);
         font-size: 16px;
-        margin-bottom: 10px;
+        max-width: 400px;
+        min-width: 100px;
     }
 </style>

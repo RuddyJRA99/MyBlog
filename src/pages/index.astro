@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import CardProject from '../components/ProjectCard.astro';
 import CardNote from '../components/NoteCard.astro';
+import { Icon } from 'astro-icon'
 
 ---
 
@@ -9,75 +10,183 @@ import CardNote from '../components/NoteCard.astro';
 	<main>
 		<section class="header">
 			<div class="header-image">
-				<img width="1000" src="../../public/User/userCover.webp">
+				<img src="../../public/User/userCover.jpeg">
 			</div>
 			<div class="header-description">
 				<h2>Hola! mi nombre es <span>Carlos</span></h2>
 				<p>soy ingeniera en sistemas, desarrollador web Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño</p>
-				<div class="header-description-contact">
-					
-				</div>
+				<ul class="header-description-contact">
+					<li>
+						<a href="#"><Icon width="35" name="mdi:email"/></a>
+					</li>
+					<li>
+						<a href="#"><Icon width="35" name="mdi:github"/></a>
+					</li>
+					<li>
+						<a href="#"><Icon width="35" name="mdi:linkedin"/></a>
+					</li>
+				</ul>
 			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-header">
+				<h2 class="title">Algunos Proyectos</h2>
+			</div>
+			<ul>
+				<li>
+					<CardProject
+						title="projecto 1"
+						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
+						date="hace un mes"
+						href="#"
+					/>
+				</li>
+				<li>
+					<CardProject
+						title="projecto 1"
+						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
+						date="hace un mes"
+						href="#"
+					/>
+				</li>
+				<li>
+					<CardProject
+						title="projecto 1"
+						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
+						date="hace un mes"
+						href="#"
+					/>
+				</li>
+			</ul>
+			<a class="buttonGetMore">ver mas</a>
+		</section>
+
+		<section>
+			<div class="section-header">
+				<h2 class="title">Mis notas</h2>
+			</div>
+			<ul>
+				<li>
+					<CardNote
+						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
+						date="hace un mes"
+						href="#"
+						author="yo"
+						title="projecto 1"
+					/>
+				</li>
+				<li>
+					<CardNote
+						title="projecto 1"
+						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
+						date="hace un mes"
+						href="#"
+						author="yo"
+					/>
+				</li>
+				<li>
+					<CardNote
+						title="projecto 1"
+						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
+						date="hace un mes"
+						href="#"
+						author="yo"
+					/>
+				</li>
+			</ul>
+			<a class="buttonGetMore">ver mas</a>
 		</section>
 	</main>
 </Layout>
 
 <style>
-	main{
-	}
+	/* HEADER SECTION */
 	.header{
-		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
+		align-items: center;
+		border-bottom: 1px solid black;
+		display: flex;
 		margin: auto;
-		background-color: brown;
-		height: calc(100vh - 200px );
+		height: auto;
 	}
+
 	.header-image{
 		overflow: hidden;
-		width: 400px;
-		
 	}
 	.header-image > img{
+		width: 100%;
 	}
+
 	.header-description{
-		width: 500px;
+		height: 80%;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-evenly;
+		justify-content: space-around;
+		max-width: 520px;
 	}
 
 	.header-description > h2{
 		font-size: 50px;
 		font-weight: 400;
+		margin: 30px 10px;
 	}
 
 	.header-description > p{
 		font-size: 20px;
 		color: var(--secondary-text);
-		margin: 0 15px;
+		margin: 0 15px 30px 15px;
 	}
 	.header-description-contact{
 		background-color: var(--box-background);
-		height: 150px;
 		border-radius: 15px;
+		display: flex;
+		justify-content: space-around;
+		padding: 30px 0;
 	}
 
-	@media screen and (max-width: 1000px){
-		.header-image{
-			width: auto;
-			background-color: aqua;
+	[astro-icon]{
+		color: var(--secondary-text);
+	}
+
+	/* NORMAL SECTION */
+
+	.buttonGetMore{
+		color: var(--secondary-text);
+		background-color: var(--box-background);
+		padding: 15px 60px;
+		border-radius: 30px;
+		font-size: 16px;
+	}
+	.buttonGetMore:hover{
+		opacity: 0.5;
+		cursor: pointer;
+	}
+
+	/*MOBILE LAYOUT */
+	@media screen and (max-width: 800px){
+		.header{
+			flex-direction: column;
+			align-items: center;
+			height: calc(100vh - 50px);
 		}
 
-		.header-image{
-			width: 150px;
-		}
-		.header-description{
-
+		.header-description h2{
+			font-size: 40px;
+			text-align: center;
 		}
 
-		.header-description > h2{
-			font-size: 30px;
+		.header-description p{
+			text-align: center;
+		}
+
+	}
+
+	/* TABLET LAYOURT */
+	@media screen and (max-width: 1500px){
+		.header-description h2{
+			font-size: 40px;
 		}
 	}
 </style>
