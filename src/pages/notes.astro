@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import NoteCard from "../components/NoteCard.astro";
+
+const notes = [
+	{
+		title: 'Project one',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		author: 'yo',
+		href:"#"
+	},
+	{
+		title: 'Project two',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		author: 'yo',
+		href:"#"
+	},{
+		title: 'Project one',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		author: 'yo',
+		href:"#"
+	},
+	{
+		title: 'Project two',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		author: 'yo',
+		href:"#"
+	},{
+		title: 'Project one',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		author: 'yo',
+		href:"#"
+	},
+]
+---
+<Layout
+    title="Mis notas"
+    indexNavbar={2}
+>
+    <main>
+		<section class="section">
+			<div class="section-header">
+
+			</div>
+			<ul>
+				{
+					notes.map(note => (
+						<li class="card">
+							<NoteCard
+								title={note.title}
+								description={note.description}
+								date={note.date}
+								href={note.href}
+                                author={note.author}
+							/>
+						</li>
+					))
+				}
+			</ul>
+			<!--<a class="buttonGetMore">ver mas</a>-->
+		</section>
+	</main>
+</Layout>
+
+<style>
+	/* SECTION */
+
+    main{
+        min-height: calc(100vh - 200px);
+    }
+	section{
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding-bottom: 50px;
+	}
+
+	section div h2{
+		width: auto;
+		border-bottom: solid 1px var(--secondary-text);
+		padding: 20px;
+		text-align: center;
+	}
+
+	section ul{
+		display: flex;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		gap: 60px;
+		padding: 40px 0;
+	}
+
+	section ul li{
+		max-width: 500px;
+	}
+	.card{
+		margin: 15px;
+	}
+	.buttonGetMore{
+		background-color: var(--box-background);
+		padding: 10px 50px;
+		border-radius: 20px;
+	}
+	.buttonGetMore:hover{
+		opacity: 0.8;
+		cursor: pointer;
+	}
+</style>

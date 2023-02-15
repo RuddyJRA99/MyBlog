@@ -1,192 +1,206 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CardProject from '../components/ProjectCard.astro';
-import CardNote from '../components/NoteCard.astro';
-import { Icon } from 'astro-icon'
+import HeaderSection from '../components/Sections/HeaderSection.astro';
+import NoteCard from '../components/NoteCard.astro';
+import userData from '../../public/User/userData.json';
+import HeaderPage from '../components/Sections/HeaderPage.astro';
 
+/* add the rest of properties */
+interface FrontmatterNotes {
+  title: string;
+  description: string;
+}
+
+/* add the rest of properties */
+interface FrontmatterProjects {
+  title: string;
+  author: string;
+  description: string;
+}
+
+const projects = await Astro.glob<FrontmatterProjects>('./Projects/*.mdx')
+
+const notes = await Astro.glob<FrontmatterNotes>('./Notes/*.mdx')
 ---
 
 <Layout title="Inicio" indexNavbar={0}>
 	<main>
-		<section class="header">
-			<div class="header-image">
-				<img src="../../public/User/userCover.jpeg">
-			</div>
-			<div class="header-description">
-				<h2>Hola! mi nombre es <span>Carlos</span></h2>
-				<p>soy ingeniera en sistemas, desarrollador web Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño</p>
-				<ul class="header-description-contact">
-					<li>
-						<a href="#"><Icon width="35" name="mdi:email"/></a>
-					</li>
-					<li>
-						<a href="#"><Icon width="35" name="mdi:github"/></a>
-					</li>
-					<li>
-						<a href="#"><Icon width="35" name="mdi:linkedin"/></a>
-					</li>
-				</ul>
-			</div>
-		</section>
-
+		<HeaderPage/>
 		<section class="section">
 			<div class="section-header">
+				<span/>
 				<h2 class="title">Algunos Proyectos</h2>
 			</div>
 			<ul>
-				<li>
-					<CardProject
-						title="projecto 1"
-						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
-						date="hace un mes"
-						href="#"
-					/>
-				</li>
-				<li>
-					<CardProject
-						title="projecto 1"
-						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
-						date="hace un mes"
-						href="#"
-					/>
-				</li>
-				<li>
-					<CardProject
-						title="projecto 1"
-						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
-						date="hace un mes"
-						href="#"
-					/>
-				</li>
+				{
+					projects.map(project => (
+						<li class="cardsProjects">
+							<CardProject
+								title={project.frontmatter.title}
+								description={project.frontmatter.description}
+								date={project.frontmatter.date}
+								href={project.url}
+							/>
+						</li>
+					))
+				}
 			</ul>
-			<a class="buttonGetMore">ver mas</a>
+			{
+				projects.length > 3 ? (<a class="buttonGetMore">ver mas</a>):null
+			}
+			
 		</section>
-
-		<section>
+		<section class="section">
 			<div class="section-header">
 				<h2 class="title">Mis notas</h2>
 			</div>
 			<ul>
-				<li>
-					<CardNote
-						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
-						date="hace un mes"
-						href="#"
-						author="yo"
-						title="projecto 1"
-					/>
-				</li>
-				<li>
-					<CardNote
-						title="projecto 1"
-						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
-						date="hace un mes"
-						href="#"
-						author="yo"
-					/>
-				</li>
-				<li>
-					<CardNote
-						title="projecto 1"
-						description="hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un"
-						date="hace un mes"
-						href="#"
-						author="yo"
-					/>
-				</li>
+				{
+					notes.map(note => (
+						<li class="cardsProjects">
+							<NoteCard
+								title={note.frontmatter.title}
+								description={note.frontmatter.description}
+								date={note.frontmatter.date}
+								href={note.url}
+								author={note.frontmatter.author}
+								urlIcon={note.frontmatter.urlImage}
+							/>
+						</li>
+					))
+				}
 			</ul>
-			<a class="buttonGetMore">ver mas</a>
+			{notes.length > 3 ? (<a class="buttonGetMore">ver mas</a>): null}
+		</section>
+		<section class="section">
+			<div class="section-header">
+				<h2 class="title">Experiencia en Tecnologias</h2>
+			</div>
+			<ul>
+				{
+					userData.technologies.map(item => (
+						<li>
+							<img class="iconTech" src={item.iconSource}/>
+						</li>
+					))
+				}
+			</ul>
 		</section>
 	</main>
 </Layout>
 
 <style>
-	/* HEADER SECTION */
-	.header{
-		flex-direction: row;
-		justify-content: space-evenly;
-		align-items: center;
-		border-bottom: 1px solid black;
-		display: flex;
+	/* SECTION */
+
+	section{
+		width: 100%;
 		margin: auto;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding-bottom: 50px;
 		height: auto;
 	}
 
-	.header-image{
-		overflow: hidden;
-	}
-	.header-image > img{
-		width: 100%;
+	.title{
+		width: auto;
+		border-bottom: solid 2px var(--primary);
+		padding: 20px;
+		color: var(--DarkTextTitle);
+		text-align: center;
 	}
 
-	.header-description{
-		height: 80%;
+	.title::after, .title::before{
+		content: " ";
+		background-color: var(--background-color);
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		border: 2px solid var(--primary);
+		border-radius: 5px;
+		transform: rotate(45deg);
+	}
+
+	.title::before{
+		margin-right: 50px;
+	}
+	.title::after{
+		margin-left: 50px;
+	}
+	.section-header{
 		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		max-width: 520px;
+		flex-direction: row;
+		align-items: center;
 	}
 
-	.header-description > h2{
-		font-size: 50px;
-		font-weight: 400;
-		margin: 30px 10px;
-	}
-
-	.header-description > p{
-		font-size: 20px;
-		color: var(--secondary-text);
-		margin: 0 15px 30px 15px;
-	}
-	.header-description-contact{
-		background-color: var(--box-background);
-		border-radius: 15px;
+	section ul{
 		display: flex;
-		justify-content: space-around;
-		padding: 30px 0;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 100px;
+		padding: 50px 0;
 	}
 
-	[astro-icon]{
-		color: var(--secondary-text);
+	.cardsProjects{
+		max-width: 450px;
+		margin: 15px;
 	}
-
-	/* NORMAL SECTION */
 
 	.buttonGetMore{
-		color: var(--secondary-text);
-		background-color: var(--box-background);
-		padding: 15px 60px;
-		border-radius: 30px;
-		font-size: 16px;
+		background-color: var(--boxDarkBackground);
+		padding: 10px 50px;
+		border-radius: 20px;
 	}
 	.buttonGetMore:hover{
-		opacity: 0.5;
+		opacity: 0.8;
 		cursor: pointer;
 	}
 
-	/*MOBILE LAYOUT */
-	@media screen and (max-width: 800px){
-		.header{
-			flex-direction: column;
-			align-items: center;
-			height: calc(100vh - 50px);
-		}
+	.section-item{
+		display: flex;
+		justify-content: space-evenly;
+	}
 
-		.header-description h2{
-			font-size: 40px;
-			text-align: center;
-		}
-
-		.header-description p{
-			text-align: center;
-		}
-
+	.section-item ul{
+		width: 100%;
+	}
+	.iconTech{
+		-webkit-filter: drop-shadow(5px 5px 5px #00000031);
+		filter: drop-shadow(5px 5px 5px #00000031);
+		height: 80px;
 	}
 
 	/* TABLET LAYOURT */
 	@media screen and (max-width: 1500px){
-		.header-description h2{
-			font-size: 40px;
+		.iconTech{
+			height: 60px;
+		}
+	}
+
+	/* MOVILE LAYOURT */
+	@media screen and (max-width: 800px){
+		.title{
+			font-size: 20px;
+		}
+		.cardsProjects{
+			max-width: none;
+		}
+		.title::before{
+			margin-right: 10px;
+			width: 10px;
+			height: 10px;
+			border-radius: 3px;
+		}
+		.title::after{
+			margin-left: 10px;
+			width: 10px;
+			height: 10px;
+			border-radius: 3px;
+		}
+
+		section ul{
+			gap: 50px;
 		}
 	}
 </style>

@@ -7,9 +7,33 @@ export interface Props{
 }
 
 const {href, title, description, date} = Astro.props;
+
+function dateFormat(date: string){
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const _MS_PER_HOUR = 1000 * 60 * 60;
+    const _MS_PER_MINUTES = 1000 * 60;
+    let text = undefined;
+    let diferent = new Date().getTime() - parseInt(date);
+
+    let days = Math.floor(diferent/_MS_PER_DAY);
+    if(days > 0){
+        return `hace ${days} ${days>1?'dias':'dia'}`
+    }
+
+    let hours = Math.floor(diferent/_MS_PER_HOUR);
+    if(hours > 0){
+        return `hace ${hours} ${hours>1?'horas':'hora'}`
+    }
+
+    let minutes = Math.floor(diferent/_MS_PER_MINUTES);
+    if(minutes > 0){
+        return `hace ${minutes} ${minutes>1?'minutos':'minuto'}`
+    }
+    return 'hace unos segundos'
+}
 ---
 
-<li class="projectCard">
+<div class="projectCard">
     <a href={href}>
         <div class="projectCard-header">
             <h3>{title}</h3>
@@ -22,24 +46,18 @@ const {href, title, description, date} = Astro.props;
             {description.substring(1, 100)}...
         </p>
         <div class="projectCard-footer">
-            <span>{date}</span>
+            <span>{dateFormat(date)}</span>
         </div>
     </a>
-</li>
+</div>
 
 <style>
     .projectCard{
         list-style: none;
-        padding: 15px;
         display: flex;
         align-items: center;
     }
-    .projectCard:hover{
-        background-color: white;
-        padding: 15px;
-        border-radius: 15px;
-    }
-
+   
     .projectCard-header{
         display: flex;
         justify-content: space-between;
@@ -66,8 +84,9 @@ const {href, title, description, date} = Astro.props;
     .projectCard-footer{
         display: flex;
         flex-direction: row;
-        justify-content: right;
+        justify-content: center;
         color: rgba(0, 0, 0, 0.40);
+        padding-top: 8px;
     }
 
     .projectCard a {
@@ -84,9 +103,6 @@ const {href, title, description, date} = Astro.props;
         padding: 30px;
         border-radius: 10px;
         color: rgba(0, 0, 0, 0.55);
-        max-width: 400px;
         min-width: 100px;
-    }
-    .projectCard span{
     }
 </style>

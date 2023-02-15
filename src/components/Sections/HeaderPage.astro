@@ -1,0 +1,139 @@
+---
+    let now = new Date();
+    let text = 'buenas tardes';
+
+    if(now.getHours() <= 12){
+        text = 'buenas dias'
+    }else if(now.getHours() >= 18){
+        text = 'buenas noches'
+    }
+    console.log(now)
+---
+<div class="content">
+    <h2>Hola, {text}!</h2>
+    <p>Bienvenidos a mi blog personal, mi nombre es Ruddy Rodriguez y espero disfruten del contenido</p>
+    <span class="box-1"></span>
+    <span class="box-2"></span>
+    <span class="box-3"></span>
+    <span class="box-4"></span>
+</div>
+
+<style>
+
+    .content{
+        width: 100%;
+        height: calc(100vh - 100px);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding: 30px;
+    }
+
+    .content span{
+        position: absolute;
+        border: solid 2px var(--boxDarkBackground);
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+    }
+
+    .box-1, .box-4{
+        animation: rotation 4s infinite linear;
+    }
+
+    .box-3, .box-2{
+        animation: rotation 4s infinite linear reverse;
+    }
+
+    .box-1{
+        top: 25%;
+        right: 25%;
+    }
+
+    .box-2{
+        top: 25%;
+        left: 25%;
+    }
+
+    .box-3{
+        bottom: 25%;
+        right: 25%;
+    }
+
+    .box-4{
+        bottom: 25%;
+        left: 25%;
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(359deg);
+        }
+    }
+
+    .content h2{
+        font-size: 50px;
+        color: var(--darkTextTitle);
+        width: 18ch;
+        animation: typing 2s steps(17), blink .5s infinite step-end alternate;
+        display: block;
+        overflow: hidden;
+        border-right: 4px solid;
+        white-space: nowrap;
+    }
+
+    .content p{
+        width: 100%;
+        font-size: 20px;
+        color: var(--darkTextSubtitle);
+        padding: 15px;
+        text-align: center;
+    }
+
+    @keyframes typing{
+        from { width: 0; }
+    }
+
+    @keyframes blink{
+        50%{ border-color: transparent; }
+    }
+
+    .container{
+        background-color: azure;
+        height: 100%;
+        width: auto;
+        max-width: 300px;
+        border-radius: 15px;
+        padding: 50px 30px;
+    }
+
+    .title{
+        font-size: 30px;
+        margin-bottom: 15pxrun;
+    }
+
+    .description{
+        color: var(--darkText);
+    }
+
+    @media screen and (max-width: 390px){
+
+        .content h2{
+            font-size: 30px;
+        }
+
+
+        .content p{
+            font-size: 16px;
+        }
+
+        .content{
+            height: calc(100vh - 75px);
+        }
+    }
+</style>

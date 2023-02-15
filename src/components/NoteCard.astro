@@ -3,60 +3,89 @@ export interface Props{
     title: string;
     description: string;
     date: string;
-    href: string;
     author: string;
+    urlIcon: string;
+    href: string
 }
 
-const {href, title, description, date, author} = Astro.props;
+const {href, urlIcon, title, description, date, author} = Astro.props;
+
+/* make like a global function */
+function dateFormat(date: string){
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const _MS_PER_HOUR = 1000 * 60 * 60;
+    const _MS_PER_MINUTES = 1000 * 60;
+    let text = undefined;
+    let diferent = new Date().getTime() - parseInt(date);
+
+    let days = Math.floor(diferent/_MS_PER_DAY);
+    if(days > 0){
+        return `hace ${days} ${days>1?'dias':'dia'}`
+    }
+
+    let hours = Math.floor(diferent/_MS_PER_HOUR);
+    if(hours > 0){
+        return `hace ${hours} ${hours>1?'horas':'hora'}`
+    }
+
+    let minutes = Math.floor(diferent/_MS_PER_MINUTES);
+    if(minutes > 0){
+        return `hace ${minutes} ${minutes>1?'minutos':'minuto'}`
+    }
+    return 'hace unos segundos'
+}
 ---
 
-<li class="NoteCard">
+<div class="NoteCard">
     <a href={href}>
         <div class="NoteCard-header">
+            <div class="NoteCard-header-icon">
+                <img src={urlIcon}>
+            </div>
             <div>
                 <h2 class="NoteCard-header-title">{title}</h2>
-                <h2 class="NoteCard-header-author">@{author}</h2>
+                <h2 class="NoteCard-header-author text-gradient">@{author}</h2>
             </div>
         </div>
 
         <div class="NoteCard-header-coverImage">
-            <img src="../../public/event-loop.png">
         </div>
-        
+
         <p>
             {description.substring(1, 100)}...
         </p>
 
         <div class="NoteCard-footer">
-            <span>{date}</span>
+            <span>{dateFormat(date)}</span>
         </div>
     </a>
-</li>
+</div>
 
 <style>
 
     .NoteCard{
         list-style: none;
-        padding: 15px;
         display: flex;
         align-items: center;
     }
-    .NoteCard:hover{
-        background-color: white;
-        padding: 15px;
-        border-radius: 15px;
-    }
-
+    
     .NoteCard-header{
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
-        margin-bottom: 10px;
     }
 
     .NoteCard-header > div{
         display: flex;
         flex-direction: column;
+        margin-left: 15px;
+    }
+
+    .NoteCard-header-icon{
+        width: 70px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 5px double var(--opacity)
     }
 
     .NoteCard-header-title{
@@ -69,7 +98,6 @@ const {href, title, description, date, author} = Astro.props;
     .NoteCard-header-author{
         font-size: 20px;
         font-weight: 400;
-        color: rgba(152, 10, 138, 0.8);
     }
 
     .NoteCard-header-coverImage{
@@ -80,11 +108,11 @@ const {href, title, description, date, author} = Astro.props;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
     .NoteCard-header-coverImage > img{
-        width: 150px;
+        width: 100%;
     }
 
     .NoteCard-footer{
@@ -99,12 +127,35 @@ const {href, title, description, date, author} = Astro.props;
     }
 
     .NoteCard p{
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: var(--boxDarkBackground);
         padding: 30px;
         border-radius: 10px;
         color: rgba(0, 0, 0, 0.55);
         font-size: 16px;
-        max-width: 400px;
-        min-width: 100px;
     }
+
+    /*MOBILE LAYOUT */
+	@media screen and (max-width: 800px){
+        .NoteCard-header-icon{
+            width: 50px;
+        }
+        .NoteCard-header-title{
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 0px;
+        }
+        .NoteCard-footer>span{
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.40);
+        }
+		.NoteCard p{
+            font-size: 16px;
+            padding: 20px;
+        }
+	}
+
+	/* TABLET LAYOURT */
+	@media screen and (max-width: 1500px){
+		
+	}
 </style>

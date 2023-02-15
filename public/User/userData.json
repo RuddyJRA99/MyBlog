@@ -1,7 +1,47 @@
 {
-    "name": "Ruddy Jesus",
+    "name": "Ruddy",
     "surname": "Rodriguez Arguedas",
-    "email": "ruddrodria99@gmail.com",
-    "phone": "84118010",
-    "imagePath" : "./userProfile"
+    "contact":[
+        {
+            "type": "email",
+            "value": "ruddrodria99@gmail.com",
+            "show": true
+        },{
+            "type": "phone",
+            "value": "+506 8411-8010",
+            "show": false
+        },{
+            "type": "linkedin",
+            "value": "https://www.linkedin.com/in/ruddyjra99/",
+            "show": true
+        },{
+            "type": "github",
+            "value": "https://github.com/RuddyJRA99",
+            "show": true
+        }
+    ],
+    "technologies": [
+        {
+            "iconSource": "../Technologies/laravelLogo.png"
+        },
+        {
+            "iconSource": "../Technologies/dockerLogo.png"
+        },
+        {
+            "iconSource": "../Technologies/nodeJSLogo.png"
+        },
+        {
+            "iconSource": "../Technologies/githubLogo.png"
+        },
+        {
+            "iconSource": "../Technologies/azureLogo.png"
+        },
+        {
+            "iconSource": "../Technologies/reactLogo.png"
+        }
+    ],
+    "imagePath" : "./userProfile",
+    "imageCoverPath": "../../public/User/userCover.png",
+    "bibliography": "Egresado de Ingeniería en Sistemas de computación en la Universidad Fidélitas, apasionado por el desarrollo de software el cual brindan las mejores.",
+    "resumeDownloadPath": "https://onedrive.live.com/download?cid=1622342CD1B90AF3&resid=1622342CD1B90AF3%21318408&authkey=APu30A01qWWm03w&em=2"
 }

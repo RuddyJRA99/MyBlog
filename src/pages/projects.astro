@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardProject from '../components/ProjectCard.astro';
+
+const projects = [
+	{
+		title: 'Project one',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+	{
+		title: 'Project two',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+	{
+		title: 'Project three',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+	{
+		title: 'Project two',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+	{
+		title: 'Project three',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+	{
+		title: 'Project two',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+	{
+		title: 'Project three',
+		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
+		date: 'hace un mes',
+		href:"#"
+	},
+]
+---
+
+<Layout title="Proyectos" indexNavbar={1}>
+	<main>
+		<section class="section">
+			<ul>
+				{
+					projects.map(project => (
+						<li class="card">
+							<CardProject
+								title={project.title}
+								description={project.description}
+								date={project.date}
+								href={project.href}
+							/>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	/* SECTION */
+	main{
+        flex: auto;
+    }
+	section{
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding-bottom: 50px;
+	}
+
+	section div h2{
+		width: auto;
+		border-bottom: solid 1px var(--secondary-text);
+		padding: 20px;
+		text-align: center;
+	}
+
+	section ul{
+		display: flex;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		gap: 60px;
+		padding: 40px 0;
+	}
+
+	.card{
+		max-width: 450px;
+		margin: 15px;
+	}
+
+	.buttonGetMore{
+		background-color: var(--box-background);
+		padding: 10px 50px;
+		border-radius: 20px;
+	}
+	.buttonGetMore:hover{
+		opacity: 0.8;
+		cursor: pointer;
+	}
+</style>
