@@ -1,30 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CardProject from '../components/ProjectCard.astro';
-import HeaderSection from '../components/Sections/HeaderSection.astro';
 import NoteCard from '../components/NoteCard.astro';
 import userData from '../../public/User/userData.json';
 import HeaderPage from '../components/Sections/HeaderPage.astro';
 
-/* add the rest of properties */
-interface FrontmatterNotes {
-  title: string;
-  description: string;
-}
-
-/* add the rest of properties */
-interface FrontmatterProjects {
-  title: string;
-  author: string;
-  description: string;
-}
+import type { FrontmatterProjects } from './projects.astro';
+import type { FrontmatterNotes } from './notes.astro';
 
 const projects = await Astro.glob<FrontmatterProjects>('./Projects/*.mdx')
-
 const notes = await Astro.glob<FrontmatterNotes>('./Notes/*.mdx')
 ---
 
-<Layout title="Inicio" indexNavbar={0}>
+<Layout title="Inicio">
 	<main>
 		<HeaderPage/>
 		<section class="section">
@@ -49,7 +37,6 @@ const notes = await Astro.glob<FrontmatterNotes>('./Notes/*.mdx')
 			{
 				projects.length > 3 ? (<a class="buttonGetMore">ver mas</a>):null
 			}
-			
 		</section>
 		<section class="section">
 			<div class="section-header">
@@ -92,7 +79,6 @@ const notes = await Astro.glob<FrontmatterNotes>('./Notes/*.mdx')
 
 <style>
 	/* SECTION */
-
 	section{
 		width: 100%;
 		margin: auto;

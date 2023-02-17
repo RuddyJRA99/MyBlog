@@ -1,39 +1,15 @@
 ---
+import { dateFormat } from '../Utils/Utils';
 export interface Props{
     title: string;
     description: string;
     date: string;
     author: string;
     urlIcon: string;
-    href: string
+    href?: string;
 }
 
 const {href, urlIcon, title, description, date, author} = Astro.props;
-
-/* make like a global function */
-function dateFormat(date: string){
-    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    const _MS_PER_HOUR = 1000 * 60 * 60;
-    const _MS_PER_MINUTES = 1000 * 60;
-    let text = undefined;
-    let diferent = new Date().getTime() - parseInt(date);
-
-    let days = Math.floor(diferent/_MS_PER_DAY);
-    if(days > 0){
-        return `hace ${days} ${days>1?'dias':'dia'}`
-    }
-
-    let hours = Math.floor(diferent/_MS_PER_HOUR);
-    if(hours > 0){
-        return `hace ${hours} ${hours>1?'horas':'hora'}`
-    }
-
-    let minutes = Math.floor(diferent/_MS_PER_MINUTES);
-    if(minutes > 0){
-        return `hace ${minutes} ${minutes>1?'minutos':'minuto'}`
-    }
-    return 'hace unos segundos'
-}
 ---
 
 <div class="NoteCard">
@@ -60,15 +36,12 @@ function dateFormat(date: string){
         </div>
     </a>
 </div>
-
 <style>
-
     .NoteCard{
         list-style: none;
         display: flex;
         align-items: center;
     }
-    
     .NoteCard-header{
         display: flex;
         justify-content: flex-start;
@@ -131,7 +104,7 @@ function dateFormat(date: string){
         padding: 30px;
         border-radius: 10px;
         color: rgba(0, 0, 0, 0.55);
-        font-size: 16px;
+        min-width: 100px;
     }
 
     /*MOBILE LAYOUT */
@@ -145,13 +118,9 @@ function dateFormat(date: string){
             margin-bottom: 0px;
         }
         .NoteCard-footer>span{
-            font-size: 14px;
             color: rgba(0, 0, 0, 0.40);
         }
-		.NoteCard p{
-            font-size: 16px;
-            padding: 20px;
-        }
+		
 	}
 
 	/* TABLET LAYOURT */

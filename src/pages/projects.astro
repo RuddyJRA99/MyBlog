@@ -2,53 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import CardProject from '../components/ProjectCard.astro';
 
-const projects = [
-	{
-		title: 'Project one',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-	{
-		title: 'Project two',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-	{
-		title: 'Project three',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-	{
-		title: 'Project two',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-	{
-		title: 'Project three',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-	{
-		title: 'Project two',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-	{
-		title: 'Project three',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		href:"#"
-	},
-]
+export const title = "Mis Proyectos";
+export interface FrontmatterProjects {
+	title: string;
+    description: string;
+    date: string;
+    href: string;
+}
+
+const projects = await Astro.glob<FrontmatterProjects>('./Projects/*.mdx');
 ---
 
-<Layout title="Proyectos" indexNavbar={1}>
+<Layout title="Proyectos">
 	<main>
 		<section class="section">
 			<ul>
@@ -56,10 +21,10 @@ const projects = [
 					projects.map(project => (
 						<li class="card">
 							<CardProject
-								title={project.title}
-								description={project.description}
-								date={project.date}
-								href={project.href}
+								title={project.frontmatter.title}
+								description={project.frontmatter.description}
+								date={project.frontmatter.date}
+								href={project.url}
 							/>
 						</li>
 					))

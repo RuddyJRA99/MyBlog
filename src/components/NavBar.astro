@@ -1,0 +1,290 @@
+---
+export interface Props{
+    options: Array<Option>;
+    currentPageTitle: string;
+}
+type Option = {
+    label: string;
+    url: string;
+}
+
+const {options, currentPageTitle} = Astro.props;
+---
+<nav class="topBar" id="topBar">
+    <span class="logo">
+        <a href="/">
+            <span class="text-gradient">RJRA</span>&gt{currentPageTitle!=="Inicio"?currentPageTitle:""}<span class="coursor">_</span>
+        </a>
+    </span>
+    <div class="group">
+        <ul class="navbar-list close hidden" id="navbar-list">
+            {
+                options.map((option: Option) => (
+                    <li>
+                        <a href={option.url}>{option.label}</a>
+                    </li>
+                ))
+            }
+            <li><span class="time" id="time"></span></li>
+        </ul>
+        <button class="buttonMenu" id="buttonMenu" aria-label="Main Menu">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                <path class="line line2" d="M 20,50 H 80" />
+                <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+            </svg>
+        </button>
+    </div>
+</nav>
+<style>
+    /*
+		TOP BAR STYLES
+	*/
+	.topBar{
+		width: 100%;
+        height: 80px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		background-color: var(--background-color);
+		padding: 0  calc(100% - 97.5%);
+		border-bottom: 1px solid var(--boxDarkBackground);
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        transition: top 0.3s;
+	}
+
+	.navbar-list{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-content: center;
+	}
+
+	.navbar-list li{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		padding-left:20px;
+		font-weight: 600;
+		color: var(--darkTextTitle);
+	}
+
+        .buttonMenu {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: none;
+            padding: 0;
+            z-index: 1;
+            height: 40px;
+            width: 40px;
+            justify-content: center;
+            align-items: center;
+        }
+        .line {
+        fill: none;
+        stroke: var(--darkTextTitle);
+        stroke-width: 3;
+        transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+            stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .line1 {
+        stroke-dasharray: 60 207;
+        stroke-width: 6;
+        }
+        .line2 {
+        stroke-dasharray: 60 60;
+        stroke-width: 6;
+        }
+        .line3 {
+        stroke-dasharray: 60 207;
+        stroke-width: 6;
+        }
+        .opened .line1 {
+        stroke-dasharray: 90 207;
+        stroke-dashoffset: -134;
+        stroke-width: 6;
+        }
+        .opened .line2 {
+        stroke-dasharray: 1 60;
+        stroke-dashoffset: -30;
+        stroke-width: 6;
+        }
+        .opened .line3 {
+        stroke-dasharray: 90 207;
+        stroke-dashoffset: -134;
+        stroke-width: 6;
+        }
+
+    .logo{
+		font-size: 20px;
+		font-weight: 600;
+	}
+	.webSiteTitle{
+		color: var(--accent-gradient);
+	}
+
+    .coursor{
+		animation: blink-cursor .5s infinite step-end alternate;
+	}
+
+    @keyframes blink-cursor{
+		50%{color: transparent}
+	}
+	.time{
+		font-size: 16px;
+		font-weight: 600;
+		color: var(--opacity);
+		cursor: default;
+	}
+	.group{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	.group > span {
+		margin-left: 100px;
+	}
+
+    @media screen and (max-width: 390px){
+        .navbar-list{
+			position: fixed;
+			display: flex;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			z-index: 1;
+			background-color: var(--background-color);
+			flex-direction: column-reverse;
+			justify-content: flex-end;
+			align-items: flex-start;
+			padding: 0 30px;
+			font-size: 20px;
+		}
+
+        .navbar-list::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: var(--boxDarkBackground);
+            z-index: -1;
+        }
+		.navbar-list > li{
+			margin-bottom: 10px;
+		}
+
+		.navbar-list > li:last-child{
+			height: 80px;
+		}
+
+		.buttonMenu{
+			display: flex;
+		}
+
+		.open{
+			animation: slide-top-bottom 800ms ease-in-out;
+            display: flex;
+		}
+
+        .close{
+            animation: slide-bottom-top 800ms ease-in-out;
+        }
+
+        .hidden{
+            display: none;
+		}
+
+        .logo{
+			justify-content: flex-start;
+			width: 100%;
+		}
+        @keyframes slide-top-bottom {
+			0% {
+				transform: translateY(-100%);
+			}
+
+			100% {
+				transform: translateY(0);
+			}
+		}
+        @keyframes slide-bottom-top {
+			0% {
+				transform: translateY(0);
+			}
+
+			100% {
+				transform: translateY(-100%);
+			}
+		}
+
+		.group{
+			justify-content: flex-end;
+			width: 100%;
+		}
+
+		.topBar{
+			padding: 20px;
+		}
+
+    }
+
+</style>
+<script>
+    let menuElement = document.querySelector<HTMLElement>('#navbar-list');
+    let buttonMenu = document.querySelector<HTMLElement>('#buttonMenu');
+    function toggleMenu(){
+        if(!buttonMenu || !menuElement) return;
+        buttonMenu.classList.toggle('opened')
+        buttonMenu.setAttribute('aria-expanded', String(buttonMenu.classList.contains('opened')))
+
+        if(menuElement?.classList.contains('hidden')){
+            menuElement.classList.add('open')
+            menuElement.classList.remove('close')
+            menuElement.classList.remove('hidden')
+            document.body.style.overflowY = "hidden";
+        }else{
+            menuElement.classList.add('close')
+            menuElement.classList.remove('open')
+            document.body.style.overflowY = "scroll";
+            setTimeout(() => {
+                menuElement?.classList.add('hidden')
+            }, 800);
+        }
+	}
+    buttonMenu?.addEventListener('click', toggleMenu);
+
+    let timeElement = document.getElementById('time');
+	function updateTime(){
+		let time = new Date();
+		let hours = time.getHours() % 12;
+		let minutes = `0${time.getMinutes()}`.slice(-2);
+		timeElement!.innerText= `${hours===0?'12':hours}:${minutes} ${time.getHours() >= 12? ' pm' : 'am'}`;
+	}
+	updateTime();
+	setInterval(updateTime, 1000)
+
+    let topbar = document.getElementById('topBar');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if(topbar){
+            if(scrollTop > lastScrollTop){
+                topbar.style.top = '-100px';
+            }else{
+                topbar.style.top = '0px';
+            }
+
+            lastScrollTop = scrollTop;
+        }
+    })
+</script>

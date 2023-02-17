@@ -1,0 +1,99 @@
+---
+import { formatList } from "astro/dist/runtime/server/render/util";
+import Layout from "./Layout.astro";
+import { dateFormat } from "../Utils/Utils";
+
+
+const {frontmatter} = Astro.props
+
+---
+<Layout title="">
+    <div class="container">
+        <div class="header">
+            <h2>{frontmatter.title}</h2>
+            <p>por {frontmatter.author} • {dateFormat(frontmatter.date)}</p>
+        </div>
+        <div class="contentMd">
+            <slot></slot>
+        </div>
+    </div>
+</Layout>
+<style is:global>
+    .contentMd{
+        padding: 0 15px;
+    }
+
+    .contentMd > p{
+        line-height: 30px;
+        text-align: justify;
+        font-size: 16px;
+    }
+
+    .contentMd > *{
+        margin-bottom: 25px;
+    }
+
+    .contentMd > h1, .contentMd > h2, .contentMd > h3{
+        margin-top: 50px;
+    }
+
+    pre{
+        border-radius: 10px;
+        background-color: var(--darkTextTitle) !important;
+        padding: 10px 0;
+        border-left: 15px solid var(--primary);
+
+    }
+
+    pre::-webkit-scrollbar {
+        height: 16px;
+    }
+    pre::-webkit-scrollbar-track {
+        background-color: var(--boxLightBackground);
+    }
+    pre::-webkit-scrollbar-thumb {
+        background-color: var(--lightTextSubtitle);
+    }
+
+    pre span{
+        color: white !important;
+        background-color: transparent !important;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    code{
+        background-color: transparent;
+    }
+
+</style>
+<style>
+    .container{
+        max-width: 21cm;
+        margin: auto;
+    }
+
+    .header{
+        text-align: center;
+        margin: 20px 0;
+        border-bottom: solid 1px var(--opacity);
+    }
+
+    .header > *{
+        margin-bottom: 15px;
+    }
+
+    .header h2{
+        font-weight: 600;
+        color: var(--darkTextTitle);
+    }
+
+    .header p {
+        color: var(--darkTextSubtitle);
+    }
+
+    .content p{
+        padding: 50px;
+    }
+
+    
+</style>

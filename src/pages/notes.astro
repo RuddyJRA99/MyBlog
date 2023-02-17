@@ -2,45 +2,22 @@
 import Layout from "../layouts/Layout.astro";
 import NoteCard from "../components/NoteCard.astro";
 
-const notes = [
-	{
-		title: 'Project one',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		author: 'yo',
-		href:"#"
-	},
-	{
-		title: 'Project two',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		author: 'yo',
-		href:"#"
-	},{
-		title: 'Project one',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		author: 'yo',
-		href:"#"
-	},
-	{
-		title: 'Project two',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		author: 'yo',
-		href:"#"
-	},{
-		title: 'Project one',
-		description: 'hace demasiado tiempo que un lector se distraerá con el contenido del texto de un demasiado tiempo que un lector se distraerá con el contenido del texto de un',
-		date: 'hace un mes',
-		author: 'yo',
-		href:"#"
-	},
-]
+export interface FrontmatterNotes {
+	title: string;
+    description: string;
+    date: string;
+    author: string;
+    urlIcon: string;
+    href: string;
+	urlImage: string;
+}
+
+export const title = "Mis notas";
+
+const notes = await Astro.glob<FrontmatterNotes>('./Notes/*.mdx');
 ---
 <Layout
     title="Mis notas"
-    indexNavbar={2}
 >
     <main>
 		<section class="section">
@@ -52,11 +29,12 @@ const notes = [
 					notes.map(note => (
 						<li class="card">
 							<NoteCard
-								title={note.title}
-								description={note.description}
-								date={note.date}
-								href={note.href}
-                                author={note.author}
+								title={note.frontmatter.title}
+								description={note.frontmatter.description}
+								date={note.frontmatter.date}
+								href={note.url}
+                                author={note.frontmatter.author}
+								urlIcon={note.frontmatter.urlImage}
 							/>
 						</li>
 					))
