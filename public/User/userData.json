@@ -5,19 +5,23 @@
         {
             "type": "email",
             "value": "ruddrodria99@gmail.com",
-            "show": true
+            "show": true,
+            "description": "correo electronico personal"
         },{
             "type": "phone",
             "value": "+506 8411-8010",
-            "show": false
+            "show": false,
+            "description": "Numero telefonico personal"
         },{
             "type": "linkedin",
             "value": "https://www.linkedin.com/in/ruddyjra99/",
-            "show": true
+            "show": true,
+            "description": "Red social profecional de contacto"
         },{
             "type": "github",
             "value": "https://github.com/RuddyJRA99",
-            "show": true
+            "show": true,
+            "description": "Repositorio de proyectos personales"
         }
     ],
     "technologies": [

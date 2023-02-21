@@ -41,6 +41,8 @@ const pages = [
 </html>
 <style is:global>
 	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 	
 	:root {
 		--accent: 38, 222, 191;
@@ -78,20 +80,21 @@ const pages = [
         text-decoration: none;
     }
 	html {
-		font-family: 'Gill Sans', sans-serif;
 		background-color: var(--background-color);
 	}
 	code {
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
 			Bitstream Vera Sans Mono, Courier New, monospace;
 	}
-	h2{
-		font-size: 30px;
-		font-weight: 400;
+	h1, h2, h3, h4, p, a{
+		font-family: 'Open Sans', sans-serif;
 	}
 	h3{
 		font-size: 20px;
 		font-weight: 400;
+	}
+	p{
+		font-size: 16px;
 	}
 	ul{
 		list-style: none;
@@ -103,6 +106,7 @@ const pages = [
 	a{
 		color: var(--secondary-text);
 	}
+
 	.text-gradient {
 		background-image: var(--accent-gradient);
 		-webkit-background-clip: text;
@@ -120,7 +124,6 @@ const pages = [
 <style>
 	.content{
 		margin: auto;
-		padding-top: 80px;
 		width: 95%;
 		min-height: calc(100vh - 80px);
 		max-width: 1440px;
@@ -137,7 +140,7 @@ const pages = [
 	}
 
 	/* MOBILE LAYOURT */
-	@media screen and (max-width: 390px){
+	@media screen and (max-width: 500px){
 		footer{
 			border-right: none;
 			padding: 20px 0;

@@ -19,8 +19,8 @@ const {href, urlIcon, title, description, date, author} = Astro.props;
                 <img src={urlIcon}>
             </div>
             <div>
-                <h2 class="NoteCard-header-title">{title}</h2>
-                <h2 class="NoteCard-header-author text-gradient">@{author}</h2>
+                <h3 class="NoteCard-header-title">{title}</h3>
+                <!--<h3 class="NoteCard-header-author">@{author}</h3>-->
             </div>
         </div>
 
@@ -44,27 +44,26 @@ const {href, urlIcon, title, description, date, author} = Astro.props;
     }
     .NoteCard-header{
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-around;
         align-items: center;
     }
 
     .NoteCard-header > div{
         display: flex;
         flex-direction: column;
-        margin-left: 15px;
     }
 
     .NoteCard-header-icon{
         width: 70px;
         border-radius: 10px;
         overflow: hidden;
-        border: 5px double var(--opacity)
+        border: 2px solid var(--opacity);
     }
 
     .NoteCard-header-title{
-        font-size: 25px;
+        font-size: 20px;
         font-weight: 400;
-        color: rgba(0, 0, 0, 0.8);
+        color: var(--darkTextTitle);
         margin-bottom: 5px;
     }
 
@@ -92,23 +91,25 @@ const {href, urlIcon, title, description, date, author} = Astro.props;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        margin-right: 10px;
     }
 
     .NoteCard-footer>span{
-        font-size: 14px;
-        color: rgba(0, 0, 0, 0.40);
+        font-size: 16px;
+        color: var(--darkTextSubtitle);
     }
 
     .NoteCard p{
         background-color: var(--boxDarkBackground);
         padding: 30px;
         border-radius: 10px;
-        color: rgba(0, 0, 0, 0.55);
+        color: var(--darkText);
         min-width: 100px;
+        margin-bottom: 10px;
     }
 
     /*MOBILE LAYOUT */
-	@media screen and (max-width: 800px){
+	@media screen and (max-width: 500px){
         .NoteCard-header-icon{
             width: 50px;
         }
@@ -117,14 +118,9 @@ const {href, urlIcon, title, description, date, author} = Astro.props;
             font-weight: 500;
             margin-bottom: 0px;
         }
-        .NoteCard-footer>span{
-            color: rgba(0, 0, 0, 0.40);
+        .NoteCard p{
+            padding: 20px;
         }
-		
-	}
 
-	/* TABLET LAYOURT */
-	@media screen and (max-width: 1500px){
-		
 	}
 </style>

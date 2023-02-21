@@ -1,25 +1,79 @@
 ---
-    let now = new Date();
-    let text = 'buenas tardes';
-
-    if(now.getHours() <= 12){
-        text = 'buenas dias'
-    }else if(now.getHours() >= 18){
-        text = 'buenas noches'
-    }
-    console.log(now)
+import { Icon } from "astro-icon";
+import userData from '../../../public/User/userData.json';
 ---
 <div class="content">
-    <h2>Hola, {text}!</h2>
-    <p>Bienvenidos a mi blog personal, mi nombre es Ruddy Rodriguez y espero disfruten del contenido</p>
+    <h2>Hola!</h2>
+    <h3>Bienvenidos a mi blog personal, mi nombre es Ruddy Rodriguez y espero disfruten del contenido</h3>
+    <ul class="contact">
+        {
+            userData.contact.map(contact => {
+                if(contact.show){
+                    return(
+                        <li class="contact-options">
+                            <a target="_blank" href={contact.type==="email"?"mailto:":"" + contact.value}><Icon name={"mdi:" + contact.type}/></a>
+                            <p class="bubble" >{contact.description}</p>
+                        </li>
+                    )
+                }
+            })
+        }
+    </ul>
+
     <span class="box-1"></span>
     <span class="box-2"></span>
     <span class="box-3"></span>
     <span class="box-4"></span>
 </div>
-
 <style>
-    
+
+    [astro-icon]{
+		color: var(--primary);
+		width: 35px;
+	}
+    .bubble{
+        margin-top: 10px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+        position: absolute;
+        width: 200px !important;
+        left: calc(50% - 100px);
+        display: none;
+        height: auto;
+        z-index: 1;
+        box-shadow: 0px 4px 3px -2px var(--darkTextSubtitle);
+    }
+
+    .contact > li > a::after{
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 10px solid white;
+        right: calc(50% - 20px);
+        display: none;
+        bottom: -12px;
+        z-index: 2;
+    }
+
+    .contact > li:hover  > a::after, .contact > li:hover .bubble{
+        display: block;
+    }
+    .contact > li > a{
+        position: relative;
+    }
+
+    .contact{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        padding: 10px;
+        max-width: 250px;
+    }
+
     .content{
         width: 100%;
         height: calc(100vh - 100px);
@@ -79,20 +133,18 @@
     .content h2{
         font-size: 50px;
         color: var(--darkTextTitle);
-        width: 20ch;
-        animation: typing 2s steps(17), blink .5s infinite step-end alternate;
+        width: 4.5ch;
+        animation: typing 500ms steps(4), blink .5s infinite step-end alternate;
         display: block;
         overflow: hidden;
-        border-right: 4px solid;
+        border-right: 2.5px solid;
         white-space: nowrap;
-        font-family: 'Roboto Mono', monospace !important;
         font-weight: 600;
-
+        text-align: center;
     }
 
-    .content p{
+    .content h3, .content p{
         width: 100%;
-        font-size: 20px;
         color: var(--darkTextSubtitle);
         padding: 15px;
         text-align: center;
@@ -124,12 +176,11 @@
         color: var(--darkText);
     }
 
-    @media screen and (max-width: 390px){
+    @media screen and (max-width: 500px){
 
         .content h2{
             font-size: 30px;
         }
-
 
         .content p{
             font-size: 16px;

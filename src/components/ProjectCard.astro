@@ -38,6 +38,7 @@ const {href, title, description, date} = Astro.props;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0 15px 10px 15px;
     }
 
     .projectCard-header-collaborators{
@@ -45,7 +46,7 @@ const {href, title, description, date} = Astro.props;
         flex-direction: row-reverse;
     }
     .projectCard-header-collaborators > span{
-        background-color: #019FA9;
+        background-color: var(--primary);
         width: 30px;
         height: 30px;
         border-radius: 50%;
